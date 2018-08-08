@@ -2,8 +2,14 @@
   "name": "domsuite",
   "version": "1.0.0",
   "description": "Browser testing/automation utilities with async/await",
-  "main": "lib/index.js",
+  "main": "build/index.js",
+  "files": [
+    "build",
+    "lib"
+  ],
   "scripts": {
+    "build": "babel lib -d build",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

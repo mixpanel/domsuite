@@ -1,0 +1,26 @@
+{
+  "name": "domsuite",
+  "version": "1.0.0",
+  "description": "Browser testing/automation utilities with async/await",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mixpanel/domsuite.git"
+  },
+  "keywords": [
+    "browser",
+    "dom",
+    "async",
+    "automation",
+    "test"
+  ],
+  "author": "dev@mixpanel.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mixpanel/domsuite/issues"
+  },
+  "homepage": "https://github.com/mixpanel/domsuite#readme"
+}

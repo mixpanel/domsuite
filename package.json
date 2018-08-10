@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "Browser testing/automation utilities with async/await",
   "main": "lib/index.js",
+  "files": [
+    "compiled",
+    "lib"
+  ],
   "scripts": {
+    "build": "babel lib -d compiled",
+    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,5 +32,10 @@
   "dependencies": {
     "lodash": "4.17.10",
     "platform": "1.3.5"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.3",
+    "babel-preset-env": "1.7.0"
   }
 }

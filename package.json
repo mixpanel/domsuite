@@ -1,6 +1,6 @@
 {
   "name": "domsuite",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Browser testing/automation utilities with async/await",
   "main": "lib/index.js",
   "files": [
@@ -31,7 +31,8 @@
   "homepage": "https://github.com/mixpanel/domsuite#readme",
   "dependencies": {
     "lodash": "4.17.10",
-    "platform": "1.3.5"
+    "platform": "1.3.5",
+    "sinon": "2.2.0"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",

@@ -1,1 +1,1 @@
-console.log(`Hello world`);
+import './fetch-server.js';

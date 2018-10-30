@@ -1,4 +1,4 @@
-const {LOCAL, PERSISTENT} = process.env;
+const {SAUCE, PERSISTENT} = process.env;
 
 module.exports = {
   npm: true,
@@ -10,14 +10,14 @@ module.exports = {
 
   plugins: {
     local: {
-      disabled: !LOCAL,
+      disabled: !!SAUCE,
       browsers: [
         `chrome`,
         `firefox`,
       ],
     },
     sauce: {
-      disabled: !!LOCAL,
+      disabled: !SAUCE,
       extendedDebugging: true,
       tunnelOptions: {
         connectRetries: 5,

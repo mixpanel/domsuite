@@ -10,7 +10,9 @@
   "scripts": {
     "build": "babel lib -d compiled",
     "prepare": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test-build && npm run test-run",
+    "test-build": "webpack --config test/webpack.config.js",
+    "test-run": "wct"
   },
   "repository": {
     "type": "git",
@@ -35,8 +37,13 @@
     "sinon": "6.1.5"
   },
   "devDependencies": {
+    "@babel/core": "7.1.2",
     "babel-cli": "6.26.0",
-    "babel-core": "6.26.3",
-    "babel-preset-env": "1.7.0"
+    "babel-loader": "8.0.4",
+    "babel-preset-env": "1.7.0",
+    "wct-browser-legacy": "1.0.1",
+    "web-component-tester": "6.8.0",
+    "webpack": "4.20.2",
+    "webpack-cli": "3.1.2"
   }
 }

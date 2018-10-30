@@ -21,6 +21,10 @@ describe(`my sweet UI`, function() {
 });
 ```
 
+## Installation
+
+`npm install --save-dev domsuite`
+
 ## Development / Running tests
 
 #### Install dependencies

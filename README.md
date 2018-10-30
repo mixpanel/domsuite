@@ -1,5 +1,7 @@
 # domsuite
 
+[![Build Status](https://travis-ci.com/mixpanel/domsuite.svg?branch=master)](https://travis-ci.com/mixpanel/domsuite)
+
 *Work In Progress*
 
 JavaScript browser testing/automation utilities. Uses `async/await` syntax to make

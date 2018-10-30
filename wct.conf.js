@@ -20,7 +20,10 @@ module.exports = {
       disabled: !SAUCE,
       extendedDebugging: true,
       tunnelOptions: {
-        connectRetries: 5,
+        // retry establishing sauce tunnel connection every 30s for 30m
+        // ...for when those pipes get clogged
+        connectRetries: 60,
+        connectRetryTimeout: 30000,
       },
       browsers: [
         {

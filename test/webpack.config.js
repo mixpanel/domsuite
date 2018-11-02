@@ -19,7 +19,23 @@ const webpackConfig = {
           {
             loader: `babel-loader`,
             options: {
-              presets: [`env`],
+              presets: [
+                [
+                  `env`,
+                  {
+                    targets: {
+                      browsers: [
+                        `Chrome >= 60`,
+                        `Firefox >= 56`,
+                        `Safari >= 10.1`,
+                        `last 1 ChromeAndroid version`,
+                        `last 1 Edge version`,
+                        `last 2 iOS versions`,
+                      ],
+                    },
+                  },
+                ],
+              ],
             },
           },
         ],

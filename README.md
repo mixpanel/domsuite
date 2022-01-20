@@ -1,6 +1,6 @@
 # domsuite
 
-[![Build Status](https://travis-ci.com/mixpanel/domsuite.svg?branch=master)](https://travis-ci.com/mixpanel/domsuite)
+![Build Status](https://github.com/mixpanel/domsuite/actions/workflows/tests.yml/badge.svg)
 
 *Work In Progress*
 

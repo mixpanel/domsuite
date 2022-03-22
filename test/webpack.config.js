@@ -18,9 +18,6 @@ const webpackConfig = {
         use: [
           {
             loader: `babel-loader`,
-            options: {
-              presets: [`env`],
-            },
           },
         ],
       },

@@ -2,13 +2,15 @@
   "name": "domsuite",
   "version": "0.5.0",
   "description": "Browser testing/automation utilities with async/await",
-  "main": "lib/index.js",
-  "type": "module",
+  "main": "cjs/index.js",
+  "module": "lib/index.js",
   "files": [
     "compiled",
     "lib"
   ],
   "scripts": {
+    "build-cjs": "npx esbuild ./lib/* --outdir=cjs --format=cjs",
+    "prepare": "npm run build-cjs",
     "test": "wtr",
     "test-sauce": "SAUCE_LAB=1 wtr"
   },

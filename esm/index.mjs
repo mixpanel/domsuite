@@ -1,9 +1,12 @@
-import {detect} from 'detect-browser';
-export {FetchServer} from './fetch-server.js';
+import * as detectBrowser from "detect-browser";
+export { FetchServer } from "./fetch-server.mjs";
+
+const { detect } = detectBrowser;
 
 // https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_isempty
-const isEmpty = obj => [Object, Array].includes((obj || {}).constructor) && !Object.entries((obj || {})).length;
-
+const isEmpty = (obj) =>
+  [Object, Array].includes((obj || {}).constructor) &&
+  !Object.entries(obj || {}).length;
 
 //region Non-async getters
 
@@ -51,7 +54,12 @@ export function isVisibleElement(el) {
 // Based on https://stackoverflow.com/a/10730777
 export function getDescendantTextParts(el) {
   const textParts = [];
-  const treeWalker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+  const treeWalker = document.createTreeWalker(
+    el,
+    NodeFilter.SHOW_TEXT,
+    null,
+    false
+  );
   let currNode = treeWalker.nextNode();
   while (currNode) {
     textParts.push(currNode.textContent);
@@ -75,18 +83,18 @@ export async function nextAnimationFrame() {
 }
 
 export async function sleep(durationMs) {
-  return new Promise(resolve => setTimeout(resolve, durationMs));
+  return new Promise((resolve) => setTimeout(resolve, durationMs));
 }
 
-export async function sleepAfterAction(waitMs=defaultWaitMsAfterAction) {
+export async function sleepAfterAction(waitMs = defaultWaitMsAfterAction) {
   // most test action functions use await sleepAfterAction()
   // sleep for at-least one animation frame so any pending renders can complete
   await nextAnimationFrame();
   await sleep(waitMs);
 }
 
-export async function retryable(retryableFunc, {maxWaitMs=1000}={}) {
-  const startTimestamp = (new Date()).getTime();
+export async function retryable(retryableFunc, { maxWaitMs = 1000 } = {}) {
+  const startTimestamp = new Date().getTime();
   do {
     let error = null;
     try {
@@ -95,12 +103,11 @@ export async function retryable(retryableFunc, {maxWaitMs=1000}={}) {
       error = e;
     }
 
-    const elapsedTime = (new Date()).getTime() - startTimestamp;
+    const elapsedTime = new Date().getTime() - startTimestamp;
     if (elapsedTime > maxWaitMs) {
-      const errorMessage = (
+      const errorMessage =
         `Retryable did not complete in allocated time:\n${error.stack}\n\n` +
-        `Failing function:\n${retryableFunc.toString()}\n`
-      );
+        `Failing function:\n${retryableFunc.toString()}\n`;
       console.error(errorMessage);
       throw new Error(errorMessage);
     }
@@ -108,9 +115,10 @@ export async function retryable(retryableFunc, {maxWaitMs=1000}={}) {
   } while (true); // eslint-disable-line
 }
 
-export async function condition(predicate, {maxWaitMs=1000}={}) {
-  const startTimestamp = (new Date()).getTime();
-  while (true) { // eslint-disable-line
+export async function condition(predicate, { maxWaitMs = 1000 } = {}) {
+  const startTimestamp = new Date().getTime();
+  while (true) {
+    // eslint-disable-line
     let error = null;
     try {
       const val = await predicate();
@@ -121,12 +129,12 @@ export async function condition(predicate, {maxWaitMs=1000}={}) {
       error = e;
     }
 
-    const elapsedTime = (new Date()).getTime() - startTimestamp;
+    const elapsedTime = new Date().getTime() - startTimestamp;
     if (elapsedTime > maxWaitMs) {
-      const errorMessage = (
-        `Condition was not met in allocated time:\n${error && error.stack}\n\n` +
-        `Failing function:\n${predicate.toString()}\n`
-      );
+      const errorMessage =
+        `Condition was not met in allocated time:\n${
+          error && error.stack
+        }\n\n` + `Failing function:\n${predicate.toString()}\n`;
       console.error(errorMessage);
       throw new Error(errorMessage);
     }
@@ -134,55 +142,89 @@ export async function condition(predicate, {maxWaitMs=1000}={}) {
   }
 }
 
-
-export async function mouseenterElement(el, {waitMs=defaultWaitMsAfterAction}={}) {
-  el.dispatchEvent(new MouseEvent(`mouseenter`, {
-    composed: true,
-  }));
+export async function mouseenterElement(
+  el,
+  { waitMs = defaultWaitMsAfterAction } = {}
+) {
+  el.dispatchEvent(
+    new MouseEvent(`mouseenter`, {
+      composed: true,
+    })
+  );
   await sleepAfterAction(waitMs);
 }
 
-export async function mouseleaveElement(el, {waitMs=defaultWaitMsAfterAction}={}) {
-  el.dispatchEvent(new MouseEvent(`mouseleave`, {
-    composed: true,
-  }));
+export async function mouseleaveElement(
+  el,
+  { waitMs = defaultWaitMsAfterAction } = {}
+) {
+  el.dispatchEvent(
+    new MouseEvent(`mouseleave`, {
+      composed: true,
+    })
+  );
   await sleepAfterAction(waitMs);
 }
 
-export async function mousedownElement(el, {waitMs=defaultWaitMsAfterAction}={}) {
-  el.dispatchEvent(new MouseEvent(`mousedown`, {
-    bubbles: true,
-    composed: true,
-  }));
+export async function mousedownElement(
+  el,
+  { waitMs = defaultWaitMsAfterAction } = {}
+) {
+  el.dispatchEvent(
+    new MouseEvent(`mousedown`, {
+      bubbles: true,
+      composed: true,
+    })
+  );
   await sleepAfterAction(waitMs);
 }
 
-export async function clickElement(el, {waitMs=defaultWaitMsAfterAction, ...mouseEventAttrs}={}) {
-  el.dispatchEvent(new MouseEvent(`click`, {bubbles: true, ...mouseEventAttrs}));
+export async function clickElement(
+  el,
+  { waitMs = defaultWaitMsAfterAction, ...mouseEventAttrs } = {}
+) {
+  el.dispatchEvent(
+    new MouseEvent(`click`, { bubbles: true, ...mouseEventAttrs })
+  );
   await sleepAfterAction(waitMs);
 }
 
-export async function changeInput(inputEl, value, {waitMs=defaultWaitMsAfterAction}={}) {
+export async function changeInput(
+  inputEl,
+  value,
+  { waitMs = defaultWaitMsAfterAction } = {}
+) {
   inputEl.value = value;
-  inputEl.dispatchEvent(new Event(`change`, {
-    bubbles: true,
-    composed: true,
-  }));
+  inputEl.dispatchEvent(
+    new Event(`change`, {
+      bubbles: true,
+      composed: true,
+    })
+  );
   await sleepAfterAction(waitMs);
 }
 
-export async function sendInput(inputEl, value, {waitMs=defaultWaitMsAfterAction}={}) {
+export async function sendInput(
+  inputEl,
+  value,
+  { waitMs = defaultWaitMsAfterAction } = {}
+) {
   inputEl.value = value;
-  inputEl.dispatchEvent(new Event(`input`, {
-    bubbles: true,
-    // composed: true is needed to mimic real 'input' event which will cross shadow-dom boundary
-    composed: true,
-  }));
+  inputEl.dispatchEvent(
+    new Event(`input`, {
+      bubbles: true,
+      // composed: true is needed to mimic real 'input' event which will cross shadow-dom boundary
+      composed: true,
+    })
+  );
   await sleepAfterAction(waitMs);
 }
 
-export async function sendInputToActiveElement(value, {waitMs=defaultWaitMsAfterAction}={}) {
-  await sendInput(getActiveElement(), value, {waitMs});
+export async function sendInputToActiveElement(
+  value,
+  { waitMs = defaultWaitMsAfterAction } = {}
+) {
+  await sendInput(getActiveElement(), value, { waitMs });
 }
 
 export const BROWSERS = {
@@ -194,7 +236,7 @@ export const BROWSERS = {
 
 export function isBrowser(browserName) {
   const browser = detect();
-  return browser === browserName;
+  return browser.name === browserName;
 }
 
 //endregion

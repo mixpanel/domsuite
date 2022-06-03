@@ -2,10 +2,16 @@
   "name": "domsuite",
   "version": "0.5.0",
   "description": "Browser testing/automation utilities with async/await",
-  "module": "lib/index.js",
-  "main": "lib/index.js",
+  "main": "./cjs/index.cjs",
+  "module": "./esm/index.mjs",
+  "type": "module",
+  "exports": {
+    "import": "./esm/index.mjs",
+    "require": "./cjs/index.cjs"
+  },
   "files": [
-    "lib"
+    "esm",
+    "cjs"
   ],
   "scripts": {
     "test": "wtr",
@@ -30,6 +36,8 @@
   "homepage": "https://github.com/mixpanel/domsuite#readme",
   "dependencies": {
     "detect-browser": "5.3.0",
+    "esm": "^3.2.25",
+    "lodash": "^4.17.21",
     "sinon": "14.0.0"
   },
   "devDependencies": {

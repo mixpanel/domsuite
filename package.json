@@ -9,7 +9,8 @@
     "lib"
   ],
   "scripts": {
-    "test": "wtr"
+    "test": "wtr",
+    "test-sauce": "SAUCE=1 wtr",
   },
   "repository": {
     "type": "git",

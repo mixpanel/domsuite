@@ -2,15 +2,12 @@
   "name": "domsuite",
   "version": "0.5.0",
   "description": "Browser testing/automation utilities with async/await",
-  "main": "cjs/index.js",
   "module": "lib/index.js",
+  "main": "lib/index.js",
   "files": [
-    "compiled",
     "lib"
   ],
   "scripts": {
-    "build-cjs": "npx esbuild ./lib/* --outdir=cjs --format=cjs",
-    "prepare": "npm run build-cjs",
     "test": "wtr",
     "test-sauce": "SAUCE_LAB=1 wtr"
   },
@@ -32,15 +29,14 @@
   },
   "homepage": "https://github.com/mixpanel/domsuite#readme",
   "dependencies": {
-    "detect-browser": "^5.3.0",
-    "lodash-es": "4.17.21",
+    "detect-browser": "5.3.0",
     "sinon": "14.0.0"
   },
   "devDependencies": {
-    "@esm-bundle/chai": "^4.3.4-fix.0",
-    "@web/test-runner": "^0.13.29",
-    "@web/test-runner-chrome": "^0.10.7",
-    "@web/test-runner-playwright": "^0.8.9",
-    "@web/test-runner-saucelabs": "^0.8.0"
+    "@esm-bundle/chai": "4.3.4-fix.0",
+    "@web/test-runner": "0.13.29",
+    "@web/test-runner-chrome": "0.10.7",
+    "@web/test-runner-playwright": "0.8.9",
+    "@web/test-runner-saucelabs": "0.8.0"
   }
 }

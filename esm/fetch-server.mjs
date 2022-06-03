@@ -1,8 +1,8 @@
-import * as sinon from "sinon";
+import * as sinon from 'sinon';
 
 // https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_isstring
 function isString(str) {
-  if (str != null && typeof str.valueOf() === "string") {
+  if (str != null && typeof str.valueOf() === 'string') {
     return true;
   }
   return false;
@@ -35,7 +35,7 @@ export class FetchServer {
    * errorCallback param allows hooking test framework error handling utils
    * into FetchServer so that tests may be reliably failed on error.
    */
-  constructor(handlers, { debug = false, errorCallback = null } = {}) {
+  constructor(handlers, {debug = false, errorCallback = null} = {}) {
     this.handlers = handlers;
     this.debug = debug;
     this.errorCallback = errorCallback;
@@ -73,8 +73,7 @@ export class FetchServer {
           }
         }
 
-        let response =
-          typeof handler === "function" ? handler(url, params) : handler;
+        let response = typeof handler === 'function' ? handler(url, params) : handler;
 
         // Not yet promise-like
         if (!response.then) {
@@ -82,22 +81,18 @@ export class FetchServer {
           const responseOptions = {
             status: 200,
             headers: {
-              "Content-Type": `application/json`,
+              'Content-Type': `application/json`,
             },
           };
-          response = Promise.resolve(
-            new Response(JSON.stringify(response), responseOptions)
-          );
+          response = Promise.resolve(new Response(JSON.stringify(response), responseOptions));
         }
 
-        this.debugLog({ url, params, response });
+        this.debugLog({url, params, response});
         return response;
       }
     }
 
-    throw new Error(
-      `Unexpected fetch: ${url} params: ${JSON.stringify(params)}`
-    );
+    throw new Error(`Unexpected fetch: ${url} params: ${JSON.stringify(params)}`);
   }
 
   /**
@@ -118,19 +113,11 @@ export class FetchServer {
     this.restore(); // clean up prior FetchServer stubs (if necessary)
 
     // stub fetch in browser environment:
-    if (
-      typeof window !== `undefined` &&
-      window.fetch &&
-      !Object.hasOwnProperty.call(window.fetch, `restore`)
-    ) {
+    if (typeof window !== `undefined` && window.fetch && !Object.hasOwnProperty.call(window.fetch, `restore`)) {
       sinon.stub(window, `fetch`).callsFake(fakeFetch);
     }
     // stub fetch in NodeJS environment:
-    if (
-      typeof global !== `undefined` &&
-      global.fetch &&
-      !Object.hasOwnProperty.call(global.fetch, `restore`)
-    ) {
+    if (typeof global !== `undefined` && global.fetch && !Object.hasOwnProperty.call(global.fetch, `restore`)) {
       sinon.stub(global, `fetch`).callsFake(fakeFetch);
     }
   }
@@ -140,19 +127,11 @@ export class FetchServer {
    */
   static restore() {
     // restore fetch in browser environment:
-    if (
-      typeof window !== `undefined` &&
-      window.fetch &&
-      Object.hasOwnProperty.call(window.fetch, `restore`)
-    ) {
+    if (typeof window !== `undefined` && window.fetch && Object.hasOwnProperty.call(window.fetch, `restore`)) {
       window.fetch.restore();
     }
     // restore fetch in NodeJS environment:
-    if (
-      typeof global !== `undefined` &&
-      global.fetch &&
-      Object.hasOwnProperty.call(global.fetch, `restore`)
-    ) {
+    if (typeof global !== `undefined` && global.fetch && Object.hasOwnProperty.call(global.fetch, `restore`)) {
       global.fetch.restore();
     }
   }
@@ -165,27 +144,23 @@ export class FetchServer {
     FetchServer.restore();
   }
 
-  debugLog({ url, params, response }) {
+  debugLog({url, params, response}) {
     if (this.debug) {
       const responseObjectPromise = response.then((r) => r.clone());
-      const responseBodyPromise = responseObjectPromise.then((clonedResponse) =>
-        clonedResponse.json()
-      );
-      Promise.all([responseObjectPromise, responseBodyPromise]).then(
-        ([response, responseBody]) => {
-          console.groupCollapsed(`[fetch-server] ${url}`);
-          console.groupCollapsed("Params");
-          console.log(JSON.stringify(params, null, 2));
-          console.groupEnd();
-          console.groupCollapsed("Response");
-          console.log(JSON.stringify(response, null, 2));
-          console.groupEnd();
-          console.group("Response Body");
-          console.log(JSON.stringify(responseBody, null, 2));
-          console.groupEnd();
-          console.groupEnd();
-        }
-      );
+      const responseBodyPromise = responseObjectPromise.then((clonedResponse) => clonedResponse.json());
+      Promise.all([responseObjectPromise, responseBodyPromise]).then(([response, responseBody]) => {
+        console.groupCollapsed(`[fetch-server] ${url}`);
+        console.groupCollapsed('Params');
+        console.log(JSON.stringify(params, null, 2));
+        console.groupEnd();
+        console.groupCollapsed('Response');
+        console.log(JSON.stringify(response, null, 2));
+        console.groupEnd();
+        console.group('Response Body');
+        console.log(JSON.stringify(responseBody, null, 2));
+        console.groupEnd();
+        console.groupEnd();
+      });
     }
   }
 }

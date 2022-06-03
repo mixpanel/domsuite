@@ -14,6 +14,7 @@
     "cjs"
   ],
   "scripts": {
+    "lint": "eslint . && prettier -c \"./**/*.{m,c}js\"",
     "test": "wtr",
     "test-sauce": "SAUCE_LAB=1 wtr"
   },
@@ -44,6 +45,9 @@
     "@web/test-runner": "0.13.29",
     "@web/test-runner-chrome": "0.10.7",
     "@web/test-runner-playwright": "0.8.9",
-    "@web/test-runner-saucelabs": "0.8.0"
+    "@web/test-runner-saucelabs": "0.8.0",
+    "eslint": "^8.17.0",
+    "eslint-config-mixpanel": "^4.0.0",
+    "prettier": "^2.6.2"
   }
 }

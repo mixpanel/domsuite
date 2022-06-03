@@ -1,3 +1,3 @@
-require = require("esm")(module /*, options*/);
+require = require('esm')(module /*, options*/);
 
-module.exports = require("../esm/index.mjs");
+module.exports = require('../esm/index.mjs');

@@ -2,18 +2,21 @@
   "name": "domsuite",
   "version": "0.5.0",
   "description": "Browser testing/automation utilities with async/await",
-  "main": "./cjs/index.cjs",
-  "module": "./esm/index.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "type": "module",
   "exports": {
-    "import": "./esm/index.mjs",
-    "require": "./cjs/index.cjs"
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
   },
   "files": [
-    "esm",
-    "cjs"
+    "dist"
   ],
   "scripts": {
+    "prepare": "npm run build",
+    "build": "tsup lib --format cjs,esm --clean --no-splitting",
     "lint": "eslint . && prettier -c \"./**/*.{m,c}js\"",
     "test": "wtr",
     "test-sauce": "SAUCE_LAB=1 wtr"
@@ -37,8 +40,7 @@
   "homepage": "https://github.com/mixpanel/domsuite#readme",
   "dependencies": {
     "detect-browser": "5.3.0",
-    "esm": "^3.2.25",
-    "sinon": "14.0.0"
+    "sinon": "^9.1.0"
   },
   "devDependencies": {
     "@esm-bundle/chai": "4.3.4-fix.0",
@@ -48,6 +50,8 @@
     "@web/test-runner-saucelabs": "0.8.0",
     "eslint": "^8.17.0",
     "eslint-config-mixpanel": "^4.0.0",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "tsup": "^6.1.0",
+    "typescript": "^4.7.3"
   }
 }

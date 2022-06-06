@@ -1,5 +1,5 @@
 import {expect} from '@esm-bundle/chai';
-import {FetchServer} from '../esm/index.mjs';
+import {FetchServer} from '../lib';
 
 describe(`FetchServer`, () => {
   it(`runs this test`, async () => {

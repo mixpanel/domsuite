@@ -25,6 +25,5 @@ jobs:
       - run: npm run test
       - run: npm run test-sauce
         env:
-          SAUCE: true
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}

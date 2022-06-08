@@ -3,11 +3,11 @@ import {playwrightLauncher} from '@web/test-runner-playwright';
 import {createSauceLabsLauncher} from '@web/test-runner-saucelabs';
 import {chromeLauncher} from '@web/test-runner-chrome';
 
-const SAUCE_LAB = parseInt(process.env.SAUCE_LAB, 10) === 1;
+const SAUCE_LABS = parseInt(process.env.SAUCE_LABS, 10) > 0;
 
 let browsers = [chromeLauncher(), playwrightLauncher({product: `firefox`})];
 
-if (SAUCE_LAB) {
+if (SAUCE_LABS) {
   const sauceLabsCapabilities = {
     name: `Saucelab tests`,
     // if you are running tests in a CI, the build id might be available as an

@@ -19,7 +19,7 @@
     "build": "tsup lib --format cjs,esm --clean --no-splitting",
     "lint": "eslint . && prettier -c \"./**/*.js\"",
     "test": "wtr",
-    "test-sauce": "SAUCE_LAB=1 wtr"
+    "test-sauce": "SAUCE_LABS=1 wtr"
   },
   "repository": {
     "type": "git",

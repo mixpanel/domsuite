@@ -1,7 +1,13 @@
 module.exports = {
   extends: [`mixpanel`],
+  env: {
+    node: true,
+    browser: true,
+  },
   rules: {
     'space-before-function-paren': `off`,
+    // in some dom operation, while(true) is necessary
+    'no-constant-condition': `off`,
   },
   overrides: [
     {

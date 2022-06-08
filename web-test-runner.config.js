@@ -34,11 +34,10 @@ if (SAUCE_LAB) {
       browserVersion: `latest`,
       platformName: `macOS 10.15`,
     }),
-    // using legacy protocol
     sauceLabsLauncher({
       browserName: `chrome`,
-      version: `72`,
-      platform: `macOS 10.13`,
+      browserVersion: `90`,
+      platformName: `macOS 10.13`,
     }),
     sauceLabsLauncher({
       browserName: `firefox`,

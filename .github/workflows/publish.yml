@@ -17,6 +17,10 @@ jobs:
         with:
           node-version: 16.x
           registry-url: https://registry.npmjs.org/
+      # check for published directory really exists
+      - name: sanity check
+        run: |
+          ([[ ! -f dist/index.cjs  ]] || [[ ! -f dist/index.js ]]) && exit 1
       - name: npm publish
         env:
           IS_ALPHA: ${{ contains(github.ref, 'alpha')}}

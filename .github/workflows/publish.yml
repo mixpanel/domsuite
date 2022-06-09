@@ -17,10 +17,6 @@ jobs:
         with:
           node-version: 16.x
           registry-url: https://registry.npmjs.org/
-      # check for published directory really exists
-      - name: sanity check
-        run: |
-          ([[ ! -f dist/index.cjs  ]] || [[ ! -f dist/index.js ]]) && exit 1
       - name: npm publish
         env:
           IS_ALPHA: ${{ contains(github.ref, 'alpha')}}
@@ -30,4 +26,5 @@ jobs:
           if [ ${IS_ALPHA} = true ]; then export NPM_TAG="--tag alpha"; fi
           if [ ${IS_BETA} = true ]; then export NPM_TAG="--tag beta"; fi
           npm ci
+          ([[ ! -f dist/index.cjs  ]] || [[ ! -f dist/index.js ]]) && exit 1
           npm publish ${NPM_TAG}

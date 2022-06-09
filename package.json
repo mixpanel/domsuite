@@ -1,6 +1,6 @@
 {
   "name": "domsuite",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Browser testing/automation utilities with async/await",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

@@ -6,8 +6,6 @@ module.exports = {
   },
   rules: {
     'space-before-function-paren': `off`,
-    // in some dom operation, while(true) is necessary
-    'no-constant-condition': `off`,
   },
   overrides: [
     {

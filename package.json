@@ -52,7 +52,7 @@
     "@web/test-runner-playwright": "0.8.9",
     "@web/test-runner-saucelabs": "0.8.0",
     "eslint": "8.17.0",
-    "eslint-config-mixpanel": "4.0.0",
+    "eslint-config-mixpanel": "4.0.1",
     "prettier": "2.6.2",
     "tsup": "6.1.0",
     "typescript": "4.7.3"
